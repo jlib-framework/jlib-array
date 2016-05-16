@@ -22,11 +22,11 @@
 package org.jlib.array;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
+import static java.util.Arrays.stream;
 import org.jlib.iterator.BidiIterable;
 import org.jlib.iterator.BidiIterator;
 
@@ -37,8 +37,10 @@ import org.jlib.iterator.BidiIterator;
  */
 public final class ArrayUtility {
 
-    public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
-    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+    public static final Object[] NO_OBJECTS = new Object[0];
+    public static final String[] NO_STRINGS = new String[0];
+
+    private ArrayUtility() {}
 
     /**
      * Crates an array of Items in a typesafe manner.
@@ -56,7 +58,7 @@ public final class ArrayUtility {
      */
     @SuppressWarnings("unchecked")
     public static <Item> Item[] array(final int length)
-    throws NegativeArraySizeException {
+        throws NegativeArraySizeException {
         return (Item[]) new Object[length];
     }
 
@@ -214,17 +216,11 @@ public final class ArrayUtility {
      *         {@code false} otherwise
      */
     private static boolean allNull(final Object... objects) {
-        for (final Object object : objects)
-            if (object != null)
-                return false;
-
-        return true;
+        return ! stream(objects).filter(object -> object != null).findFirst().isPresent();
     }
 
-    public static <Value, Result> Result[] map(final Value[] values, final Function<Value, Result> mapFunction,
-                                               final IntFunction<Result[]> generator) {
-        return Arrays.stream(values).map(mapFunction).toArray(generator);
+    public static <Value, Result>
+    Result[] map(final Value[] values, final Function<Value, Result> mapFunction, final IntFunction<Result[]> generator) {
+        return stream(values).map(mapFunction).toArray(generator);
     }
-
-    private ArrayUtility() {}
 }

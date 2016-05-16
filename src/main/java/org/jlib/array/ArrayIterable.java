@@ -21,6 +21,7 @@
 
 package org.jlib.array;
 
+import lombok.RequiredArgsConstructor;
 import org.jlib.iterator.BidiIterable;
 import org.jlib.iterator.BidiIterator;
 
@@ -32,15 +33,12 @@ import org.jlib.iterator.BidiIterator;
  *
  * @author Igor Akkerman
  */
+@RequiredArgsConstructor
 public class ArrayIterable<Item>
-implements BidiIterable<Item> {
+    implements BidiIterable<Item> {
 
     /** array to traverse */
     private final Item[] array;
-
-    public ArrayIterable(final Item[] array) {
-        this.array = array;
-    }
 
     @Override
     public BidiIterator<Item> iterator() {

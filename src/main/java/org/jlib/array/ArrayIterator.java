@@ -34,7 +34,7 @@ import org.jlib.iterator.NoPreviousItemException;
  * @author Igor Akkerman
  */
 public class ArrayIterator<Item>
-implements BidiIterator<Item> {
+    implements BidiIterator<Item> {
 
     /** array to traverse */
     private final Item[] array;
@@ -88,7 +88,7 @@ implements BidiIterator<Item> {
 
     @Override
     public Item previous()
-    throws NoPreviousItemException {
+        throws NoPreviousItemException {
         if (! hasPrevious())
             throw new NoPreviousItemException("array", array);
 
