@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
+import lombok.experimental.UtilityClass;
 import org.jlib.iterator.BidiIterable;
 import org.jlib.iterator.BidiIterator;
 
@@ -35,6 +36,7 @@ import org.jlib.iterator.BidiIterator;
  *
  * @author Igor Akkerman
  */
+@UtilityClass
 public final class ArrayUtility {
 
     public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
@@ -225,6 +227,4 @@ public final class ArrayUtility {
                                                final IntFunction<Result[]> generator) {
         return Arrays.stream(values).map(mapFunction).toArray(generator);
     }
-
-    private ArrayUtility() {}
 }
