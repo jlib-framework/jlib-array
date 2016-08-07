@@ -27,6 +27,7 @@ import java.util.function.Function;
 import java.util.function.IntFunction;
 
 import static java.util.Arrays.stream;
+import lombok.experimental.UtilityClass;
 import org.jlib.iterator.BidiIterable;
 import org.jlib.iterator.BidiIterator;
 
@@ -35,12 +36,11 @@ import org.jlib.iterator.BidiIterator;
  *
  * @author Igor Akkerman
  */
+@UtilityClass
 public final class ArrayUtility {
 
     public static final Object[] NO_OBJECTS = new Object[0];
     public static final String[] NO_STRINGS = new String[0];
-
-    private ArrayUtility() {}
 
     /**
      * Crates an array of Items in a typesafe manner.
