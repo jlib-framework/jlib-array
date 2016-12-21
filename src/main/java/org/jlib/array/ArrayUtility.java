@@ -21,12 +21,15 @@
 
 package org.jlib.array;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.stream;
+import static java.util.function.UnaryOperator.identity;
 import lombok.experimental.UtilityClass;
 import org.jlib.iterator.BidiIterable;
 import org.jlib.iterator.BidiIterator;
@@ -120,32 +123,29 @@ public final class ArrayUtility {
      * @return integer specifying the total number of itemsnew
      */
     public static int getFlattenedItemsCount(final Object... items) {
-        int itemsCount = 0;
 
-        for (final Object item : items)
-            itemsCount += item.getClass().isArray() ?
-                          getFlattenedItemsCount((Object[]) item) :
-                          1;
-
-        return itemsCount;
+        return stream(items)
+            .map(item -> item.getClass().isArray() ? getFlattenedItemsCount((Object[]) item) : 1)
+            .reduce(0, Integer::sum);
     }
 
     /**
      * Recursively appends all Items specified as a comma separated list to the
-     * specified {@link List}.
-     *
-     * @param allItems
-     *        {@link List} to which the items are added
+     * specified {@link Collection}.
      *
      * @param items
-     *        comma separated liet of items
+     *        comma separated sequence of items
      */
-    public static void flatten(final List<Object> allItems, final Object... items) {
-        for (final Object item : items)
-            if (item.getClass().isArray())
-                flatten(allItems, (Object[]) item);
-            else
-                allItems.add(item);
+    @SafeVarargs
+    public static <Item> void flatten(final Collection<? super Item> target, final Item... items) {
+        flattenAsStream(items).forEachOrdered(target::add);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <Item> Stream<Item> flattenAsStream(final Item[] items) {
+        return stream(items)
+            .map(item -> item.getClass().isArray() ? flattenAsStream((Item[]) item) : Stream.of(item))
+            .flatMap(identity());
     }
 
     /**
@@ -162,33 +162,7 @@ public final class ArrayUtility {
      */
     @SuppressWarnings("unchecked")
     public static <Item> Item[] flatten(final Item... items) {
-        final List<Object> allItems = new ArrayList<>(getFlattenedItemsCount(items));
-        flatten(allItems, items);
-        return (Item[]) allItems.toArray();
-    }
-
-    /**
-     * Compares the specified {@link Object}s for mutual equality. Two {@link Object}s {@code object1}, {@code object2}
-     * are considered equal if {@code object1.equals(object2)}. Returns {@code true} for an empty sequence of
-     * {@link Object}s.
-     *
-     * @param objects
-     *        comma separated sequence of {@link Object}s to compare
-     *
-     * @return {@code true} if all specified {@link Object}s are equal or if the specified sequence of {@link Object}s
-     *         is empty; {@code false} otherwise
-     */
-    public static boolean allEqual(final Object... objects) {
-        if (objects.length == 0)
-            return true;
-
-        final Object firstObject = objects[0];
-
-        for (int index = 1; index < objects.length; index++)
-            if (! firstObject.equals(objects[index]))
-                return false;
-
-        return true;
+        return (Item[]) flattenAsStream(items).toArray(Object[]::new);
     }
 
     /**
@@ -201,9 +175,9 @@ public final class ArrayUtility {
      * @return {@code true} if all specified Objects are equal or if the specified sequence of Objects is empty;
      *         {@code false} otherwise
      */
-    public static boolean allEqualOrNull(final Object... objects) {
-        return objects.length == 0 || //
-               (objects[0] != null ? allEqual(objects) : allNull(objects));
+    public static boolean allEqual(final Object... objects) {
+        return stream(objects)
+            .reduce(true, Objects::equals, Boolean::logicalOr);
     }
 
     /**
@@ -216,7 +190,7 @@ public final class ArrayUtility {
      *         {@code false} otherwise
      */
     private static boolean allNull(final Object... objects) {
-        return ! stream(objects).filter(object -> object != null).findFirst().isPresent();
+        return stream(objects).noneMatch(Objects::nonNull);
     }
 
     public static <Value, Result>
