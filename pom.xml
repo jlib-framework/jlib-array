@@ -28,21 +28,33 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>jlib Array Components</name>
+    <groupId>org.jlib</groupId>
     <artifactId>jlib-array</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <parent>
-        <groupId>org.jlib</groupId>
-        <artifactId>jlib-base</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
-
     <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <build>
         <plugins>
+            <!-- Java Version -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.17</version>
             </plugin>
         </plugins>
     </build>
@@ -52,26 +64,31 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.jlib</groupId>
             <artifactId>jlib-codequality</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.jlib</groupId>
             <artifactId>jlib-iterator</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.jlib</groupId>
             <artifactId>jlib-exception</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId>
+            <version>2.5.3</version>
         </dependency>
 
         <!-- unit test dependencies -->
@@ -79,16 +96,19 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>4.12</version>
         </dependency>
 
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <version>3.10.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <version>2.19.1</version>
         </dependency>
     </dependencies>
 </project>
