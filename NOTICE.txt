@@ -1,0 +1,5 @@
+jlib
+Copyright 2005-2018 Igor Akkerman
+
+This product includes software developed at
+Dynamite Services (http://www.dynamite-services.com/).
