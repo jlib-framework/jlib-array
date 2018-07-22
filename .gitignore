@@ -1,0 +1,17 @@
+# Maven
+target
+
+# Gradle
+.gradle
+gen
+bin
+out
+build
+
+# IntelliJ IDEA
+*.iml
+/.idea/workspace.xml
+/.idea/libraries
+
+# Windows
+Thumbs.db
