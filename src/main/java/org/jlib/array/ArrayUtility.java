@@ -130,11 +130,16 @@ public final class ArrayUtility {
     }
 
     /**
-     * Recursively appends all Items specified as a comma separated list to the
-     * specified {@link Collection}.
+     * Recursively appends all Items specified as a comma separated list to the specified {@link Collection}.
+     *
+     * @param <Item>
+     *        type of the array items
      *
      * @param items
-     *        comma separated sequence of items
+     *        comma separated sequence of Items
+     *
+     * @param target
+     *        target {@link Collection} of Items
      */
     @SafeVarargs
     public static <Item> void flatten(final Collection<? super Item> target, final Item... items) {
@@ -189,7 +194,7 @@ public final class ArrayUtility {
      * @return {@code true} if all of the specified {@link Object} references are {@code null};
      *         {@code false} otherwise
      */
-    private static boolean allNull(final Object... objects) {
+    public static boolean allNull(final Object... objects) {
         return stream(objects).noneMatch(Objects::nonNull);
     }
 
