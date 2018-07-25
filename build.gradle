@@ -31,3 +31,11 @@ plugins {
 
 apply from: 'jlib.gradle'
 
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'org.jlib:jlib-exception:1.0.0-SNAPSHOT'
+    implementation 'org.jlib:jlib-iterator:1.0.0-SNAPSHOT'
+}

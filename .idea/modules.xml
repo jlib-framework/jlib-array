@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/jlib-array.iml" filepath="$PROJECT_DIR$/.idea/jlib-array.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jlib-array_main.iml" filepath="$PROJECT_DIR$/.idea/modules/jlib-array_main.iml" group="jlib-array" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jlib-array_test.iml" filepath="$PROJECT_DIR$/.idea/modules/jlib-array_test.iml" group="jlib-array" />
     </modules>
   </component>
 </project>
