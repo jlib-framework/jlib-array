@@ -31,8 +31,8 @@ import java.util.stream.Stream;
 import static java.util.Arrays.stream;
 import static java.util.function.UnaryOperator.identity;
 import lombok.experimental.UtilityClass;
-import org.jlib.iterator.BidiIterable;
-import org.jlib.iterator.BidiIterator;
+import org.jlib.iterable.BidiIterable;
+import org.jlib.iterable.BidiIterator;
 
 /**
  * Utility for arrays.

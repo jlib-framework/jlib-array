@@ -22,8 +22,8 @@
 package org.jlib.array;
 
 import lombok.RequiredArgsConstructor;
-import org.jlib.iterator.BidiIterable;
-import org.jlib.iterator.BidiIterator;
+import org.jlib.iterable.BidiIterable;
+import org.jlib.iterable.BidiIterator;
 
 /**
  * Wrapper for an array allowing it to be used as {@link Iterable}.

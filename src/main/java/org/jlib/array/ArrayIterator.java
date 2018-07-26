@@ -21,9 +21,9 @@
 
 package org.jlib.array;
 
-import org.jlib.iterator.BidiIterator;
-import org.jlib.iterator.NoNextItemException;
-import org.jlib.iterator.NoPreviousItemException;
+import org.jlib.iterable.BidiIterator;
+import org.jlib.iterable.NoNextItemException;
+import org.jlib.iterable.NoPreviousItemException;
 
 /**
  * {@link BidiIterator} over the items of an array.
@@ -40,6 +40,7 @@ public class ArrayIterator<Item>
     private final Item[] array;
 
     /** current index */
+    @SuppressWarnings("UnusedAssignment") // explicit assignment left for clarity
     private int currentIndex = 0;
 
     /**
