@@ -33,11 +33,7 @@ ext.detailedDescription = 'jlib utilities related to arrays'
 
 apply from: 'jlib.gradle'
 
-repositories {
-    mavenLocal()
-}
-
 dependencies {
-    implementation 'org.jlib:jlib-iterable:1.0.0-SNAPSHOT'
+    implementation 'org.jlib:jlib-iterable:1.0.0'
 }
 
