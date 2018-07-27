@@ -28,8 +28,6 @@ plugins {
     id 'net.researchgate.release' version '2.6.0'
 }
 
-version = '1.0.0-SNAPSHOT'
-
 description = 'jlib array utilities'
 ext.detailedDescription = 'jlib utilities related to arrays'
 
